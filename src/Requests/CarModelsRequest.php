@@ -16,10 +16,14 @@ class CarModelsRequest extends Request
 
     /**
      * CarModelsRequest constructor.
+     *
+     * @param null|string $maker
      */
-    public function __construct()
+    public function __construct($maker = null)
     {
         parent::__construct();
+
+        $this->setUrl($this->url . '?maker=' . $maker);
     }
 
     /**

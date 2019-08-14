@@ -52,6 +52,11 @@ class EwaAPI
     protected $sessionId;
 
     /**
+     * @var
+     */
+    protected $salePoint;
+
+    /**
      * PolisAPI constructor.
      *
      * @param string $login
@@ -80,6 +85,7 @@ class EwaAPI
 
         if(isset($auth['sessionId'])) {
             $this->sessionId = $auth['sessionId'];
+            $this->salePoint = $auth['user']['salePoint']['id'];
         } else {
             throw new Exception($auth, 'Authorization problem');
         }
@@ -112,6 +118,14 @@ class EwaAPI
         }
 
         return $response->getBody();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSalePoint()
+    {
+        return $this->salePoint;
     }
 
     /**
