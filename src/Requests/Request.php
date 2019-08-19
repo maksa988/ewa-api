@@ -72,7 +72,7 @@ abstract class Request
      */
     public function getType()
     {
-        return $this->getType();
+        return $this->type;
     }
 
     /**
