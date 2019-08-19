@@ -22,6 +22,11 @@ abstract class Request
     protected $method = "GET";
 
     /**
+     * @var string
+     */
+    protected $type = "form_params";
+
+    /**
      * @var bool
      */
     protected $isFile = false;
@@ -60,6 +65,14 @@ abstract class Request
         return [
             //
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->getType();
     }
 
     /**

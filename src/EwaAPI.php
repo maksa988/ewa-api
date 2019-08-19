@@ -107,7 +107,7 @@ class EwaAPI
             $response = $this->client->request($request->getMethod(),$this->getAPIUrl() . $request->getUrl(), [
                 'cookies' => $request->getCookies($this->getApiDomain(), $this->sessionId),
                 'headers' => $request->getHeaders(),
-                'form_params' => $request->getData(),
+                $request->getType() => $request->getData(),
             ]);
         } catch (ClientException  $e) {
             $this->throwError($e);
