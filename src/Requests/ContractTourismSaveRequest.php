@@ -70,14 +70,24 @@ class ContractTourismSaveRequest extends Request
     protected $days;
 
     /**
-     * @var integer
+     * @var int
      */
     protected $country;
 
     /**
-     * @var string
+     * @var int
      */
-    protected $payment;
+    protected $coverageTerritory;
+
+    /**
+     * @var array
+     */
+    protected $risks;
+
+    /**
+     * @var array
+     */
+    protected $customFields;
 
     /**
      * ContractSaveRequest constructor.
@@ -99,16 +109,19 @@ class ContractTourismSaveRequest extends Request
      * @param \DateTime $documentDate
      * @param string $documentIssued
      * @param integer $country
-     * @param string $payment
+     * @param integer $coverageTerritory
      * @param bool $multiObject
+     * @param array $customFields
      * @param array $insuranceObjects
+     * @param array $risks
      * @param string $state
      * @param int $bonusMalus
      */
     public function __construct($tariff_id, $tariff_type, $number, $days, \DateTime $date, \DateTime $startDate,
                                 $tax_number, $first_name, $last_name, $address, $phone, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, \DateTime $documentDate,
-                                $documentIssued, $country, $payment, $multiObject = true, $insuranceObjects = [], $state = 'DRAFT', $bonusMalus = 1)
+                                $documentIssued, $country, $coverageTerritory, $multiObject = true, $customFields = [],
+                                $insuranceObjects = [], $risks = [], $state = 'DRAFT', $bonusMalus = 1)
     {
         $this->tariff = [
             'type' => $tariff_type,
@@ -121,9 +134,11 @@ class ContractTourismSaveRequest extends Request
         $this->bonusMalus = $bonusMalus;
         $this->insuranceObjects = $insuranceObjects;
         $this->days = $days;
+        $this->coverageTerritory = $coverageTerritory;
         $this->country = $country;
         $this->multiObject = $multiObject;
-        $this->payment = $payment;
+        $this->risks = $risks;
+        $this->customFields = $customFields;
 
         $this->customer = [
             'code' => $tax_number,
@@ -168,20 +183,24 @@ class ContractTourismSaveRequest extends Request
             'insuranceObjects' => $this->insuranceObjects,
             'multiObject' => $this->multiObject,
             'state' => $this->state,
+            'customFields' => $this->customFields,
             'bonusMalus' => 1,
+            'coverageTerritory' => [
+                'id' => $this->coverageTerritory,
+            ],
             'country' => [
                 'id' => $this->country
             ],
-            'risks' => [
-                [
-                    'risk' => [
-                        'id' => 1,
-                    ],
-                    'insuranceAmount' => 30000,
-                    'amountCurrency' => "EUR",
-                ]
-            ],
-            'payment' => $this->payment,
+            'risks' => $this->risks,
+//            'risks' => [
+//                [
+//                    'risk' => [
+//                        'id' => 1,
+//                    ],
+//                    'insuranceAmount' => 30000,
+//                    'amountCurrency' => "EUR",
+//                ]
+//            ],
 //  "coverageTerritory": {
 //        "id": 1
 //  },
