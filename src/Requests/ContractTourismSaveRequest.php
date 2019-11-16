@@ -75,11 +75,6 @@ class ContractTourismSaveRequest extends Request
     protected $country;
 
     /**
-     * @var int
-     */
-    protected $coverageTerritory;
-
-    /**
      * @var array
      */
     protected $risks;
@@ -109,7 +104,6 @@ class ContractTourismSaveRequest extends Request
      * @param \DateTime $documentDate
      * @param string $documentIssued
      * @param integer $country
-     * @param integer $coverageTerritory
      * @param bool $multiObject
      * @param array $customFields
      * @param array $insuranceObjects
@@ -120,7 +114,7 @@ class ContractTourismSaveRequest extends Request
     public function __construct($tariff_id, $tariff_type, $number, $days, \DateTime $date, \DateTime $startDate,
                                 $tax_number, $first_name, $last_name, $address, $phone, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, \DateTime $documentDate,
-                                $documentIssued, $country, $coverageTerritory, $multiObject = true, $customFields = [],
+                                $documentIssued, $country, $multiObject = true, $customFields = [],
                                 $insuranceObjects = [], $risks = [], $state = 'DRAFT', $bonusMalus = 1)
     {
         $this->tariff = [
@@ -134,7 +128,6 @@ class ContractTourismSaveRequest extends Request
         $this->bonusMalus = $bonusMalus;
         $this->insuranceObjects = $insuranceObjects;
         $this->days = $days;
-        $this->coverageTerritory = $coverageTerritory;
         $this->country = $country;
         $this->multiObject = $multiObject;
         $this->risks = $risks;
@@ -185,28 +178,10 @@ class ContractTourismSaveRequest extends Request
             'state' => $this->state,
             'customFields' => $this->customFields,
             'bonusMalus' => 1,
-            'coverageTerritory' => [
-                'id' => $this->coverageTerritory,
-            ],
             'country' => [
                 'id' => $this->country
             ],
             'risks' => $this->risks,
-//            'risks' => [
-//                [
-//                    'risk' => [
-//                        'id' => 1,
-//                    ],
-//                    'insuranceAmount' => 30000,
-//                    'amountCurrency' => "EUR",
-//                ]
-//            ],
-//  "coverageTerritory": {
-//        "id": 1
-//  },
-//  "country": {
-//        "id": 112
-//  }
         ]);
     }
 
