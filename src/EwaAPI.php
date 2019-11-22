@@ -19,7 +19,7 @@ class EwaAPI
     /**
      * @var string
      */
-    const API_URL = 'https://ewa.ua/ewa/api/v';
+    const API_URL = 'https://web.ewa.ua/ewa/api/v';
 
     /**
      * @var string
