@@ -97,6 +97,7 @@ class ContractTourismSaveRequest extends Request
      * @param string $last_name
      * @param string $address
      * @param string $phone
+     * @param $email
      * @param \DateTime $birthDate
      * @param string $documentType
      * @param string $documentSeries
@@ -112,7 +113,7 @@ class ContractTourismSaveRequest extends Request
      * @param int $bonusMalus
      */
     public function __construct($tariff_id, $tariff_type, $number, $days, \DateTime $date, \DateTime $startDate,
-                                $tax_number, $first_name, $last_name, $address, $phone, \DateTime $birthDate,
+                                $tax_number, $first_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, \DateTime $documentDate,
                                 $documentIssued, $country, $multiObject = true, $customFields = [],
                                 $insuranceObjects = [], $risks = [], $state = 'DRAFT', $bonusMalus = 1)
@@ -139,6 +140,7 @@ class ContractTourismSaveRequest extends Request
             'nameFirst' => $first_name,
             'address' => $address,
             'phone' => $phone,
+            'email' => $email,
             'birthDate' => $birthDate->format('Y-m-d'),
             'document' => [
                 'type' => $documentType,
