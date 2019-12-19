@@ -65,10 +65,16 @@ class ContractSaveRequest extends Request
     protected $insuranceObject = [];
 
     /**
+     * @var mixed
+     */
+    protected $payment;
+
+    /**
      * ContractSaveRequest constructor.
      * @param string $tariff_id
      * @param string $tariff_type
      * @param string $number
+     * @param $payment
      * @param \DateTime $date
      * @param \DateTime $startDate
      * @param string $tax_number
@@ -88,7 +94,7 @@ class ContractSaveRequest extends Request
      * @param string $state
      * @param int $bonusMalus
      */
-    public function __construct($tariff_id, $tariff_type, $number, \DateTime $date, \DateTime $startDate,
+    public function __construct($tariff_id, $tariff_type, $number, $payment, \DateTime $date, \DateTime $startDate,
                                 $tax_number, $first_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, \DateTime $documentDate,
                                 $documentIssued, $insuranceObject, $drivingExpLessThreeYears = true, $state = 'DRAFT', $bonusMalus = 1)
@@ -104,6 +110,7 @@ class ContractSaveRequest extends Request
         $this->bonusMalus = $bonusMalus;
         $this->drivingExpLessThreeYears = $drivingExpLessThreeYears;
         $this->insuranceObject = $insuranceObject;
+        $this->payment = $payment;
 
         $this->customer = [
             'code' => $tax_number,
@@ -149,6 +156,7 @@ class ContractSaveRequest extends Request
             'state' => $this->state,
             'bonusMalus' => 1,
             'drivingExpLessThreeYears' => $this->drivingExpLessThreeYears,
+            'payment' => $this->payment,
         ]);
     }
 
