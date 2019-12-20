@@ -62,6 +62,8 @@ class EwaAPI
      * @param string $login
      * @param string $password
      * @param bool $testMode
+     * @throws Exception
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function __construct($login, $password, $testMode = false)
     {
@@ -81,13 +83,15 @@ class EwaAPI
      */
     public function auth()
     {
-        $auth = $this->request(new AuthRequest($this->login, $this->password));
+        $request = new AuthRequest($this->login, $this->password);
+
+        $auth = $this->request($request);
 
         if(isset($auth['sessionId'])) {
             $this->sessionId = $auth['sessionId'];
             $this->salePoint = $auth['user']['salePoint']['id'];
         } else {
-            throw new Exception($auth, 'Authorization problem');
+            throw new Exception($auth, $request, 'Authorization problem');
         }
     }
 
@@ -110,7 +114,7 @@ class EwaAPI
                 $request->getType() => $request->getData(),
             ]);
         } catch (ClientException  $e) {
-            $this->throwError($e);
+            $this->throwError($e, $request);
         }
 
         if(! $request->isFile()) {
@@ -177,15 +181,16 @@ class EwaAPI
     /**
      * @param ClientException $e
      *
+     * @param Request $request
      * @throws Exception
      */
-    protected function throwError(ClientException $e)
+    protected function throwError(ClientException $e, Request $request)
     {
         $error = $this->decodeResponse($e->getResponse());
 
         //
 
-        throw new Exception($e->getResponse());
+        throw new Exception($e->getResponse(), $request);
     }
 
     /**
