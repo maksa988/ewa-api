@@ -22,7 +22,7 @@ class Exception extends BaseException
     {
         $error = \GuzzleHttp\json_decode((string) $response->getBody(), true);
 
-        $message = 'EwaAPI: ' . $error['message'] ?? $message;
+        $message = 'EwaAPI: ' . ($error['message'] ?? $message);
 
         $this->response = $response;
 
