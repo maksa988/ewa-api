@@ -186,20 +186,31 @@ class EwaAPI
      */
     protected function throwError(ClientException $e, Request $request)
     {
-        $error = $this->decodeResponse($e->getResponse());
-
-        //
-
         throw new Exception($e->getResponse(), $request);
     }
 
     /**
      * @param ResponseInterface $response
      *
-     * @return array
+     * @return array|string
      */
     protected function decodeResponse(ResponseInterface $response)
     {
-        return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        if($this->isJson($response->getBody()->getContents())) {
+            return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        } else {
+            return $response->getBody()->getContents();
+        }
+    }
+
+    /**
+     * @param $string
+     * @return bool
+     */
+    protected function isJson($string)
+    {
+        json_decode($string);
+
+        return (json_last_error() == JSON_ERROR_NONE);
     }
 }
