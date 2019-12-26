@@ -196,10 +196,12 @@ class EwaAPI
      */
     protected function decodeResponse(ResponseInterface $response)
     {
-        if($this->isJson($response->getBody()->getContents())) {
-            return \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
+        $data = $response->getBody()->getContents();
+
+        if($this->isJson($data) && ! empty($data)) {
+            return json_decode($data, true);
         } else {
-            return $response->getBody()->getContents();
+            return $data;
         }
     }
 
