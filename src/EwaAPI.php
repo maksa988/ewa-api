@@ -186,7 +186,7 @@ class EwaAPI
      */
     protected function throwError(ClientException $e, Request $request)
     {
-        throw new Exception($e->getResponse(), $request);
+        throw new Exception($e->getResponse(), $request, $this->isJson($e->getResponse()->getBody()->__toString()));
     }
 
     /**

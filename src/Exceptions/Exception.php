@@ -25,9 +25,13 @@ class Exception extends BaseException
      * @param Request $request
      * @param null $message
      */
-    public function __construct(ResponseInterface $response, Request $request, $message = null)
+    public function __construct(ResponseInterface $response, Request $request, $isJson = false, $message = null)
     {
-        $error = \GuzzleHttp\json_decode((string) $response->getBody(), true);
+        if($isJson) {
+            $error = \GuzzleHttp\json_decode($response->getBody()->__toString(), true);
+        } else {
+            $error = $response->getBody()->__toString();
+        }
 
         $message = 'EwaAPI: ' . ($error['message'] ?? $message);
 
