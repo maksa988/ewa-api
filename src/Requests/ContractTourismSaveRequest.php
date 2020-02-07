@@ -165,7 +165,7 @@ class ContractTourismSaveRequest extends Request
      */
     public function getData()
     {
-        return array_merge(parent::getData(), [
+        $data = [
             'type' => 'tourism',
             'salePoint' => [
                 'id' => config('services.ewa.salePoint'),
@@ -183,7 +183,6 @@ class ContractTourismSaveRequest extends Request
             'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.v+0000"),
             "coverageDays" => $this->days,
             'customer' => $this->customer,
-            'insuranceObject' => $this->insuranceObject,
             'insuranceObjects' => $this->insuranceObjects,
             'multiObject' => $this->multiObject,
             'state' => $this->state,
@@ -193,7 +192,13 @@ class ContractTourismSaveRequest extends Request
                 'id' => $this->country
             ],
             'risks' => $this->risks,
-        ]);
+        ];
+
+        if(! empty($this->insuranceObject)) {
+            $data['insuranceObject'] = $this->insuranceObject;
+        }
+
+        return array_merge(parent::getData(), $data);
     }
 
     /**
