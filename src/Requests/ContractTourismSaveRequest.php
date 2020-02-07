@@ -60,6 +60,11 @@ class ContractTourismSaveRequest extends Request
     protected $insuranceObjects = [];
 
     /**
+     * @var array
+     */
+    protected $insuranceObject = [];
+
+    /**
      * @var bool
      */
     protected $multiObject = true;
@@ -107,6 +112,7 @@ class ContractTourismSaveRequest extends Request
      * @param integer $country
      * @param bool $multiObject
      * @param array $customFields
+     * @param array $insuranceObject
      * @param array $insuranceObjects
      * @param array $risks
      * @param string $state
@@ -116,7 +122,8 @@ class ContractTourismSaveRequest extends Request
                                 $tax_number, $first_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, \DateTime $documentDate,
                                 $documentIssued, $country, $multiObject = true, $customFields = [],
-                                $insuranceObjects = [], $risks = [], $state = 'DRAFT', $bonusMalus = 1)
+                                $insuranceObject = [], $insuranceObjects = [],
+                                $risks = [], $state = 'DRAFT', $bonusMalus = 1)
     {
         $this->tariff = [
             'type' => $tariff_type,
@@ -127,6 +134,7 @@ class ContractTourismSaveRequest extends Request
         $this->startDate = $startDate;
         $this->state = $state;
         $this->bonusMalus = $bonusMalus;
+        $this->insuranceObject = $insuranceObject;
         $this->insuranceObjects = $insuranceObjects;
         $this->days = $days;
         $this->country = $country;
@@ -175,6 +183,7 @@ class ContractTourismSaveRequest extends Request
             'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.v+0000"),
             "coverageDays" => $this->days,
             'customer' => $this->customer,
+            'insuranceObject' => $this->insuranceObject,
             'insuranceObjects' => $this->insuranceObjects,
             'multiObject' => $this->multiObject,
             'state' => $this->state,
