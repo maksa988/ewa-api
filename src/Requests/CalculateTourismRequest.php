@@ -67,6 +67,16 @@ class CalculateTourismRequest extends Request
     protected $customerCategory;
 
     /**
+     * @var bool
+     */
+    protected $simplified = false;
+
+    /**
+     * @var null
+     */
+    protected $tripPurpose = null;
+
+    /**
      * CalculateTourismRequest constructor.
      *
      * @param integer $salePoint
@@ -78,10 +88,12 @@ class CalculateTourismRequest extends Request
      * @param string $customerCategory
      * @param array $birthdays
      * @param array $risks
+     * @param bool $simplified
+     * @param null $tripPurpose
      */
     public function __construct($salePoint, $multivisa, \DateTime $coverageFrom, \DateTime $coverageTo,
                                 $coverageDays, $country, $customerCategory = CustomerCategory::NATURAL,
-                                $birthdays = [], $risks = [])
+                                $birthdays = [], $risks = [], $simplified = false, $tripPurpose = null)
     {
         parent::__construct();
 
@@ -94,6 +106,8 @@ class CalculateTourismRequest extends Request
         $this->country = $country;
         $this->birthdays = $birthdays;
         $this->risks = $risks;
+        $this->simplified = $simplified;
+        $this->tripPurpose = $tripPurpose;
     }
 
     /**
@@ -111,6 +125,8 @@ class CalculateTourismRequest extends Request
             'country' => $this->country,
             'risks' => $this->risks,
             'birthDays' => $this->birthdays,
+            'simplified' => $this->simplified,
+            'tripPurpose' => $this->tripPurpose,
         ]);
     }
 
