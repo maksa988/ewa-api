@@ -85,8 +85,9 @@ class ContractSaveRequest extends Request
      * @param $email
      * @param \DateTime $birthDate
      * @param string $documentType
-     * @param string $documentSeries
-     * @param string $documentNumber
+     * @param string|null $documentSeries
+     * @param string|null $documentNumber
+     * @param string|null $documentRecord
      * @param \DateTime $documentDate
      * @param string $documentIssued
      * @param array $insuranceObject
@@ -96,7 +97,7 @@ class ContractSaveRequest extends Request
      */
     public function __construct($tariff_id, $tariff_type, $number, $payment, \DateTime $date, \DateTime $startDate,
                                 $tax_number, $first_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
-                                $documentType, $documentSeries, $documentNumber, \DateTime $documentDate,
+                                $documentType, $documentSeries, $documentNumber, $documentRecord, \DateTime $documentDate,
                                 $documentIssued, $insuranceObject, $drivingExpLessThreeYears = true, $state = 'DRAFT', $bonusMalus = 1)
     {
         $this->tariff = [
@@ -124,6 +125,7 @@ class ContractSaveRequest extends Request
                 'type' => $documentType,
                 'series' => $documentSeries,
                 'number' => $documentNumber,
+                'record' => $documentRecord,
                 'date' => $documentDate->format('Y-m-d'),
                 'issuedBy' => $documentIssued,
             ],
