@@ -73,8 +73,6 @@ class EwaAPI
         $this->testMode = $testMode;
 
         $this->client = new Client;
-
-        $this->auth();
     }
 
     /**
@@ -88,11 +86,26 @@ class EwaAPI
         $auth = $this->request($request);
 
         if(isset($auth['sessionId'])) {
-            $this->sessionId = $auth['sessionId'];
-            $this->salePoint = $auth['user']['salePoint']['id'];
+            return $auth;
         } else {
             throw new Exception($auth, $request, 'Authorization problem');
         }
+    }
+
+    /**
+     * @param $value
+     */
+    public function setSessionId($value)
+    {
+        $this->sessionId = $value;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setSalePoint($value)
+    {
+        $this->salePoint = $value;
     }
 
     /**
