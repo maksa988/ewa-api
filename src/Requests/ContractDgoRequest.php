@@ -69,6 +69,7 @@ class ContractDgoRequest extends Request
      * @param \DateTime $startDate
      * @param string $tax_number
      * @param string $first_name
+     * @param string $middle_name
      * @param string $last_name
      * @param string $address
      * @param string $phone
@@ -84,7 +85,7 @@ class ContractDgoRequest extends Request
      * @param $customFields
      * @param string $state
      */
-    public function __construct($tariff_id, $tariff_type, $limit, \DateTime $date, \DateTime $startDate, $tax_number, $first_name, $last_name,
+    public function __construct($tariff_id, $tariff_type, $limit, \DateTime $date, \DateTime $startDate, $tax_number, $first_name, $middle_name, $last_name,
                                 $address, $phone, $email, \DateTime $birthDate, $documentType, $documentSeries, $documentNumber, $documentRecord,
                                 \DateTime $documentDate, $documentIssued, $insuranceObject, $customFields, $state = 'DRAFT')
     {
@@ -101,6 +102,7 @@ class ContractDgoRequest extends Request
         $this->customer = [
             'code' => $tax_number,
             'nameLast' => $last_name,
+            'nameMiddle' => $middle_name,
             'nameFirst' => $first_name,
             'address' => $address,
             'phone' => $phone,

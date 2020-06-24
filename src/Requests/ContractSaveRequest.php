@@ -79,6 +79,7 @@ class ContractSaveRequest extends Request
      * @param \DateTime $startDate
      * @param string $tax_number
      * @param string $first_name
+     * @param string $middle_name
      * @param string $last_name
      * @param string $address
      * @param string $phone
@@ -96,7 +97,7 @@ class ContractSaveRequest extends Request
      * @param int $bonusMalus
      */
     public function __construct($tariff_id, $tariff_type, $number, $payment, \DateTime $date, \DateTime $startDate,
-                                $tax_number, $first_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
+                                $tax_number, $first_name, $middle_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, $documentRecord, \DateTime $documentDate,
                                 $documentIssued, $insuranceObject, $drivingExpLessThreeYears = true, $state = 'DRAFT', $bonusMalus = 1)
     {
@@ -116,6 +117,7 @@ class ContractSaveRequest extends Request
         $this->customer = [
             'code' => $tax_number,
             'nameLast' => $last_name,
+            'nameMiddle' => $middle_name,
             'nameFirst' => $first_name,
             'address' => $address,
             'phone' => $phone,
