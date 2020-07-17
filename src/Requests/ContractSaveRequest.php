@@ -40,6 +40,11 @@ class ContractSaveRequest extends Request
     protected $startDate;
 
     /**
+     * @var string|null
+     */
+    protected $privilegeType;
+
+    /**
      * @var array
      */
     protected $customer;
@@ -77,6 +82,7 @@ class ContractSaveRequest extends Request
      * @param $payment
      * @param \DateTime $date
      * @param \DateTime $startDate
+     * @param $privilegeType
      * @param string $tax_number
      * @param string $first_name
      * @param string $middle_name
@@ -96,7 +102,7 @@ class ContractSaveRequest extends Request
      * @param string $state
      * @param int $bonusMalus
      */
-    public function __construct($tariff_id, $tariff_type, $number, $payment, \DateTime $date, \DateTime $startDate,
+    public function __construct($tariff_id, $tariff_type, $number, $payment, \DateTime $date, \DateTime $startDate, $privilegeType,
                                 $tax_number, $first_name, $middle_name, $last_name, $address, $phone, $email, \DateTime $birthDate,
                                 $documentType, $documentSeries, $documentNumber, $documentRecord, \DateTime $documentDate,
                                 $documentIssued, $insuranceObject, $drivingExpLessThreeYears = true, $state = 'DRAFT', $bonusMalus = 1)
@@ -114,6 +120,7 @@ class ContractSaveRequest extends Request
         $this->insuranceObject = $insuranceObject;
         $this->payment = $payment;
 
+        $this->privilegeType = $privilegeType;
         $this->customer = [
             'code' => $tax_number,
             'nameLast' => $last_name,
@@ -155,6 +162,7 @@ class ContractSaveRequest extends Request
             'number' => $this->number,
             'date' => $this->date->format('Y-m-d'),
             'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.v+0300"),
+            'privilegeType' => $this->privilegeType,
             'customer' => $this->customer,
             'insuranceObject' => $this->insuranceObject,
             'state' => $this->state,
