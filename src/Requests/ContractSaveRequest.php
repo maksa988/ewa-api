@@ -161,7 +161,7 @@ class ContractSaveRequest extends Request
             'tariff' => $this->tariff,
             'number' => $this->number,
             'date' => $this->date->format('Y-m-d'),
-            'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.v+0300"),
+            'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.vO"),
             'privilegeType' => $this->privilegeType,
             'customer' => $this->customer,
             'insuranceObject' => $this->insuranceObject,

@@ -138,7 +138,7 @@ class ContractDgoRequest extends Request
             ],
             'tariff' => $this->tariff,
             'date' => $this->date->format('Y-m-d'),
-            'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.v+0300"),
+            'dateFrom' => $this->startDate->format("Y-m-d\TH:i:s.vO"),
             'customer' => $this->customer,
             'insuranceObject' => $this->insuranceObject,
             'state' => $this->state,
