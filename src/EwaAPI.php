@@ -14,7 +14,7 @@ class EwaAPI
     /**
      * @var string
      */
-    const VERSION = '9';
+    const VERSION = '15';
 
     /**
      * @var string
